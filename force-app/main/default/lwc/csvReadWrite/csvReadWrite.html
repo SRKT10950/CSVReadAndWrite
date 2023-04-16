@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="CSV Reader And Write" icon-name="doctype:csv">
+        <div class="slds-p-around_medium">
+            <lightning-radio-group name="hasHeader" options={options} value={radioHeaderValue}
+                label="CSV File Has Header" onchange={handleInput} class="validate">
+            </lightning-radio-group>
+            <lightning-input type="text" name="header" label="Enter Headers (separated by comma)" onchange={handleInput}
+                required={headerRequired} if:true={headerRequired} class="validate">
+            </lightning-input>
+            <lightning-input type="Number" name="columnCount" label="Enter Number Of Columns" onchange={handleInput}
+                required={columnCountRequired} if:true={columnCountRequired} class="validate">
+            </lightning-input>
+            <lightning-input type="Number" name='rowNumber' label="Read From Row No." onchange={handleInput}
+                class="validate">
+            </lightning-input>
+            <p><B>Note : </B>Default it will start from second (2) row.</p>
+        </div>
+        <div class="slds-p-around_medium">
+            <lightning-input type="file" label="Please upload csv file" accept=".csv" onchange={handleFileUpload}>
+            </lightning-input>
+        </div>
+    </lightning-card>
+</template>
