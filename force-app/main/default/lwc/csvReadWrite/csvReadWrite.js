@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
 import csvHandler from '@salesforce/apex/CSVReadWriteController.csvHandler';
+import parseCSV from '@salesforce/apex/CsvBatchController.parseCSV';
 
 export default class CsvReadWrite extends LightningElement {
     csvData;
@@ -115,6 +116,14 @@ export default class CsvReadWrite extends LightningElement {
     parse(csv) {
         // parse the csv file and treat each line as one item of an array
         let lines = csv.split(/\r\n|\n/);
+        //For direct process into class.
+        parseCSV({ csvrowsData: lines })
+            .then(result => {
+                console.log('parse: ' + result);
+            })
+            .catch(error => {
+                this.handleError(error);
+            });
         let headers = [];
         let stopArray = false;
         let data = [];
